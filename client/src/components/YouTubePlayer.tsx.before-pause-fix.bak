@@ -252,7 +252,14 @@ export default function YouTubePlayer({
       ) {
         player.playVideo();
       }
-    } else { player.pauseVideo(); }
+    } else if (
+      player.getPlayerState() ===
+        window.YT.PlayerState.PLAYING ||
+      player.getPlayerState() ===
+        window.YT.PlayerState.BUFFERING
+    ) {
+      player.pauseVideo();
+    }
 
     const timeout = window.setTimeout(() => {
       suppressEventsRef.current = false;
@@ -324,7 +331,6 @@ export default function YouTubePlayer({
     </div>
   );
 }
-
 
 
 
