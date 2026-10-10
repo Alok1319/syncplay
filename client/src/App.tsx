@@ -6,7 +6,7 @@ import { socket } from "./socket/socket";
 interface User { id: string; name: string; createdAt: string }
 interface Participant { id: string; socketId: string; username: string; role: "HOST" | "MODERATOR" | "PARTICIPANT"; joinedAt: string }
 interface RoomState { id: string; roomCode: string; hostId: string; createdAt: string; playbackState: { videoId: string; playbackState: "PLAYING" | "PAUSED"; currentTime: number; updatedAt: number }; participants: Participant[] }
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API_URL = import.meta.env.VITE_API_URL || "https://syncplay-server-lz9y.onrender.com";;
 
 function AuthScreen({ onAuthenticated }: { onAuthenticated: (token: string, user: User) => void }) {
   const [mode, setMode] = useState<"login" | "register">("register");
