@@ -16,7 +16,8 @@ export class RoomManager {
     hostId: string,
     socketId: string,
     username: string,
-    initialVideoId: string = ""
+    initialVideoId: string = "",
+    userId: string = ""
   ): Room {
     const roomId = crypto.randomUUID();
     const roomCode = this.generateRoomCode();
@@ -32,7 +33,8 @@ export class RoomManager {
       hostId,
       socketId,
       username,
-      "HOST"
+      "HOST",
+      userId
     );
 
     room.addParticipant(host);
@@ -54,7 +56,8 @@ export class RoomManager {
     roomCode: string,
     participantId: string,
     socketId: string,
-    username: string
+    username: string,
+    userId: string = ""
   ): Participant | null {
     const room = this.rooms.get(roomCode);
 
@@ -66,7 +69,8 @@ export class RoomManager {
       participantId,
       socketId,
       username,
-      "PARTICIPANT"
+      "PARTICIPANT",
+      userId
     );
 
     room.addParticipant(participant);
@@ -100,6 +104,13 @@ export class RoomManager {
     return code;
   }
 
+  findRoomParticipantByUserId(userId: string): { room: Room; participant: Participant } | undefined {
+    for (const room of this.rooms.values()) {
+      const participant = room.getParticipants().find((item) => item.userId === userId);
+      if (participant) return { room, participant };
+    }
+    return undefined;
+  }
   getAllRooms(): Room[] {
     return Array.from(this.rooms.values());
   }

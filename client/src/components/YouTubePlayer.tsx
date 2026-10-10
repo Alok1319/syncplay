@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface YouTubePlayerProps {
   videoId: string;
@@ -236,6 +236,11 @@ export default function YouTubePlayer({
     const playerTime = player.getCurrentTime();
     const desiredTime = Math.max(0, currentTime || 0);
 
+    // Pause immediately before seeking so a remote pause is not delayed.
+    if (playbackState === "PAUSED") {
+      player.pauseVideo();
+    }
+
     if (Math.abs(playerTime - desiredTime) > 1.5) {
       player.seekTo(desiredTime, true);
       lastTimeRef.current = desiredTime;
@@ -252,7 +257,7 @@ export default function YouTubePlayer({
       ) {
         player.playVideo();
       }
-    } else { player.pauseVideo(); }
+    }
 
     const timeout = window.setTimeout(() => {
       suppressEventsRef.current = false;

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import YouTubePlayer from "../components/YouTubePlayer";
 import { socket } from "../socket/socket";
 
+import RoomChat from "../components/RoomChat";
+import "../syncplay-theme.css";
 type ParticipantRole =
   | "HOST"
   | "MODERATOR"
@@ -635,7 +637,7 @@ export default function Room({
   };
 
   return (
-    <main
+    <main className="syncplay-room"
       style={{
         minHeight: "100vh",
         background: "#020617",
@@ -727,13 +729,8 @@ export default function Room({
           </div>
         )}
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns:
-              "minmax(0, 1fr) 320px",
-            gap: "24px",
-          }}
+        <div className="room-layout"
+          style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) 320px", gap: "24px" }}
         >
           <section>
             <div
@@ -983,7 +980,7 @@ export default function Room({
             )}
           </section>
 
-          <aside
+          <aside className="room-sidebar"
             style={{
               background:
                 "#0f172a",
@@ -991,8 +988,7 @@ export default function Room({
                 "14px",
               padding:
                 "18px",
-              height:
-                "fit-content",
+              height: "100%",
             }}
           >
             <h2
@@ -1170,12 +1166,16 @@ export default function Room({
                 )}
               </div>
             )}
+
+
+            <div style={{ marginTop: 20, borderTop: '1px solid #334155', paddingTop: 18 }}>
+<RoomChat
+          roomCode={room.roomCode || roomCode}
+          username={currentParticipant?.username ?? "Guest"}
+        />
+            </div>
           </aside>
         </div>
-      </div>
-    </main>
+      </div></main>
   );
 }
-
-
-

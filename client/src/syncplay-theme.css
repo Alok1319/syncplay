@@ -1,0 +1,1456 @@
+﻿:root {
+
+  color-scheme: dark;
+
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --sp-border: rgba(148, 163, 184, .17);
+
+  --sp-muted: #a4b2c9;
+
+}
+
+
+
+html, body, #root {
+
+  min-height: 100%;
+
+  margin: 0;
+
+}
+
+
+
+body {
+
+  background: #080b16;
+
+  color: #f1f5f9;
+
+}
+
+
+
+.syncplay-room {
+
+  min-height: 100vh !important;
+
+  padding: clamp(16px, 2.4vw, 34px) !important;
+
+  color: #f1f5f9 !important;
+
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif !important;
+
+  background:
+
+    radial-gradient(ellipse at 10% 0%, rgba(59,130,246,.19), transparent 38%),
+
+    radial-gradient(ellipse at 90% 12%, rgba(124,58,237,.17), transparent 34%),
+
+    linear-gradient(145deg, #080b16, #0c1223 54%, #080b16) !important;
+
+}
+
+
+
+.syncplay-room > div {
+
+  max-width: 1560px !important;
+
+  width: 100%;
+
+  margin-inline: auto !important;
+
+}
+
+
+
+.syncplay-room header {
+
+  border-bottom: 1px solid var(--sp-border);
+
+  padding-bottom: 18px;
+
+}
+
+
+
+.syncplay-room header h1 {
+
+  font-size: clamp(28px, 3vw, 38px) !important;
+
+  font-weight: 800 !important;
+
+  letter-spacing: -1px;
+
+  background: linear-gradient(100deg, #fff, #a5b4fc 60%, #67e8f9);
+
+  color: transparent !important;
+
+  background-clip: text;
+
+  -webkit-background-clip: text;
+
+}
+
+
+/* =====================================================
+   SYNCPLAY — CONSOLIDATED ROOM LAYOUT FIX
+   ===================================================== */
+
+.syncplay-room,
+.syncplay-room * {
+  box-sizing: border-box;
+}
+
+.syncplay-room {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+.syncplay-room > div {
+  width: 100%;
+  max-width: 1600px;
+  min-width: 0;
+  margin-inline: auto;
+}
+
+.syncplay-room .room-layout {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 320px) !important;
+  align-items: stretch !important;
+  gap: 22px !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+.syncplay-room .room-layout > section,
+.syncplay-room .room-layout > aside.room-sidebar {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  align-self: stretch !important;
+}
+
+.syncplay-room .room-layout > section {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.syncplay-room .room-layout > aside.room-sidebar {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  position: static !important;
+  top: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  overflow-wrap: anywhere;
+}
+
+.syncplay-room .room-sidebar > *,
+.syncplay-room .room-sidebar section,
+.syncplay-room .room-sidebar [aria-label="Room chat"],
+.syncplay-room .room-sidebar [aria-label="Room chat and reactions"] {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+.syncplay-room .room-sidebar input,
+.syncplay-room .room-sidebar textarea {
+  width: 100%;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+.syncplay-room .room-layout iframe {
+  display: block;
+  max-width: 100%;
+}
+
+/* Stack columns when there is not enough room. */
+@media (max-width: 900px) {
+  .syncplay-room .room-layout {
+    grid-template-columns: minmax(0, 1fr) !important;
+    align-items: stretch !important;
+    gap: 18px !important;
+  }
+
+  .syncplay-room .room-layout > section,
+  .syncplay-room .room-layout > aside.room-sidebar {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
+
+/* Keep reaction buttons consistent and responsive. */
+.syncplay-room .room-sidebar button[aria-label*="😂"],
+.syncplay-room .room-sidebar button[aria-label*="❤️"],
+.syncplay-room .room-sidebar button[aria-label*="🔥"],
+.syncplay-room .room-sidebar button[aria-label*="👏"],
+.syncplay-room .room-sidebar button[aria-label*="😮"],
+.syncplay-room .room-sidebar button[aria-label*="👍"],
+.syncplay-room .room-sidebar button[aria-label*="🎉"],
+.syncplay-room .room-sidebar button[aria-label*="😭"] {
+  width: 56px;
+  height: 52px;
+  min-width: 0;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 560px) {
+  .syncplay-room .room-sidebar button[aria-label*="😂"],
+  .syncplay-room .room-sidebar button[aria-label*="❤️"],
+  .syncplay-room .room-sidebar button[aria-label*="🔥"],
+  .syncplay-room .room-sidebar button[aria-label*="👏"],
+  .syncplay-room .room-sidebar button[aria-label*="😮"],
+  .syncplay-room .room-sidebar button[aria-label*="👍"],
+  .syncplay-room .room-sidebar button[aria-label*="🎉"],
+  .syncplay-room .room-sidebar button[aria-label*="😭"] {
+    width: 48px;
+    height: 46px;
+  }
+}
+
+
+/* =====================================================
+   SYNCPLAY — CONSOLIDATED ROOM LAYOUT FIX
+   ===================================================== */
+
+.syncplay-room,
+.syncplay-room * {
+  box-sizing: border-box;
+}
+
+.syncplay-room {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+.syncplay-room > div {
+  width: 100%;
+  max-width: 1600px;
+  min-width: 0;
+  margin-inline: auto;
+}
+
+.syncplay-room .room-layout {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 320px) !important;
+  align-items: stretch !important;
+  gap: 22px !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+.syncplay-room .room-layout > section,
+.syncplay-room .room-layout > aside.room-sidebar {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  align-self: stretch !important;
+}
+
+.syncplay-room .room-layout > section {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.syncplay-room .room-layout > aside.room-sidebar {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  position: static !important;
+  top: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  overflow-wrap: anywhere;
+}
+
+.syncplay-room .room-sidebar > *,
+.syncplay-room .room-sidebar section,
+.syncplay-room .room-sidebar [aria-label="Room chat"],
+.syncplay-room .room-sidebar [aria-label="Room chat and reactions"] {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+.syncplay-room .room-sidebar input,
+.syncplay-room .room-sidebar textarea {
+  width: 100%;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+.syncplay-room .room-layout iframe {
+  display: block;
+  max-width: 100%;
+}
+
+/* Stack columns when there is not enough room. */
+@media (max-width: 900px) {
+  .syncplay-room .room-layout {
+    grid-template-columns: minmax(0, 1fr) !important;
+    align-items: stretch !important;
+    gap: 18px !important;
+  }
+
+  .syncplay-room .room-layout > section,
+  .syncplay-room .room-layout > aside.room-sidebar {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
+
+/* Keep reaction buttons consistent and responsive. */
+.syncplay-room .room-sidebar button[aria-label*="😂"],
+.syncplay-room .room-sidebar button[aria-label*="❤️"],
+.syncplay-room .room-sidebar button[aria-label*="🔥"],
+.syncplay-room .room-sidebar button[aria-label*="👏"],
+.syncplay-room .room-sidebar button[aria-label*="😮"],
+.syncplay-room .room-sidebar button[aria-label*="👍"],
+.syncplay-room .room-sidebar button[aria-label*="🎉"],
+.syncplay-room .room-sidebar button[aria-label*="😭"] {
+  width: 56px;
+  height: 52px;
+  min-width: 0;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 560px) {
+  .syncplay-room .room-sidebar button[aria-label*="😂"],
+  .syncplay-room .room-sidebar button[aria-label*="❤️"],
+  .syncplay-room .room-sidebar button[aria-label*="🔥"],
+  .syncplay-room .room-sidebar button[aria-label*="👏"],
+  .syncplay-room .room-sidebar button[aria-label*="😮"],
+  .syncplay-room .room-sidebar button[aria-label*="👍"],
+  .syncplay-room .room-sidebar button[aria-label*="🎉"],
+  .syncplay-room .room-sidebar button[aria-label*="😭"] {
+    width: 48px;
+    height: 46px;
+  }
+}
+
+/* =====================================================
+   SYNCPLAY — MATCH LEFT AND RIGHT PANEL BOTTOM EDGES
+   ===================================================== */
+
+.syncplay-room .room-layout {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 320px) !important;
+  align-items: stretch !important;
+  gap: 22px !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+/* Make the complete left column stretch to the sidebar height
+   and give its boundary a visible edge. */
+.syncplay-room .room-layout > section {
+  display: flex !important;
+  flex-direction: column !important;
+  align-self: stretch !important;
+  height: auto !important;
+  min-height: 0 !important;
+  min-width: 0 !important;
+  padding: 0 0 18px !important;
+  border-bottom: 1px solid rgba(163, 230, 53, 0.35) !important;
+  box-sizing: border-box !important;
+}
+
+/* Right sidebar defines the grid row height. */
+.syncplay-room .room-layout > aside.room-sidebar {
+  align-self: stretch !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  min-width: 0 !important;
+  position: static !important;
+  overflow: visible !important;
+  box-sizing: border-box !important;
+}
+
+/* Prevent content from widening either column. */
+.syncplay-room .room-layout > section > *,
+.syncplay-room .room-layout > aside.room-sidebar > * {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+@media (max-width: 900px) {
+  .syncplay-room .room-layout {
+    grid-template-columns: minmax(0, 1fr) !important;
+    align-items: stretch !important;
+  }
+
+  .syncplay-room .room-layout > section {
+    height: auto !important;
+    padding-bottom: 0 !important;
+    border-bottom: 0 !important;
+  }
+}
+
+/* =====================================================
+   FINAL FIX: MATCH THE OUTER LEFT AND RIGHT PANEL EDGES
+   ===================================================== */
+
+.syncplay-room .room-layout {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 320px) !important;
+  align-items: stretch !important;
+  gap: 22px !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* The complete left column becomes a visible outer panel. */
+.syncplay-room .room-layout > section {
+  display: flex !important;
+  flex-direction: column !important;
+  align-self: stretch !important;
+  height: auto !important;
+  min-height: 0 !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+
+  padding: 18px !important;
+  border: 1px solid var(--sp-border, #414a3d) !important;
+  border-radius: 16px !important;
+  background: rgba(32, 37, 31, 0.45) !important;
+}
+
+/* The right sidebar and left panel share the same grid-row height. */
+.syncplay-room .room-layout > aside.room-sidebar {
+  display: flex !important;
+  flex-direction: column !important;
+  align-self: stretch !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  min-width: 0 !important;
+  position: static !important;
+  overflow: visible !important;
+  box-sizing: border-box !important;
+}
+
+/* Prevent nested content from widening either panel. */
+.syncplay-room .room-layout > section > *,
+.syncplay-room .room-layout > aside.room-sidebar > * {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+.syncplay-room .room-layout iframe {
+  max-width: 100% !important;
+}
+
+/* Stack panels on smaller screens instead of squeezing the sidebar. */
+@media (max-width: 900px) {
+  .syncplay-room .room-layout {
+    grid-template-columns: minmax(0, 1fr) !important;
+    align-items: stretch !important;
+  }
+
+  .syncplay-room .room-layout > section {
+    padding: 12px !important;
+  }
+
+  .syncplay-room .room-layout > section,
+  .syncplay-room .room-layout > aside.room-sidebar {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
+
+/* =====================================================
+   SYNCPLAY — MIDNIGHT CRIMSON / ELECTRIC BLUE
+   Premium shared theme for entry page and watch room
+   ===================================================== */
+
+:root {
+  --sp-bg: #090b18;
+  --sp-surface: #11172a;
+  --sp-surface-raised: #171d34;
+  --sp-border: rgba(150, 166, 218, 0.20);
+  --sp-text: #f5f7ff;
+  --sp-muted: #aab5d0;
+  --sp-red: #f04462;
+  --sp-blue: #6478ff;
+  --sp-cyan: #55d9f4;
+}
+
+/* Global midnight atmosphere */
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  color: var(--sp-text) !important;
+  background:
+    radial-gradient(
+      ellipse at 4% 8%,
+      rgba(229, 57, 87, 0.17),
+      transparent 32%
+    ),
+    radial-gradient(
+      ellipse at 96% 12%,
+      rgba(72, 91, 255, 0.20),
+      transparent 34%
+    ),
+    radial-gradient(
+      ellipse at 50% 100%,
+      rgba(125, 42, 91, 0.10),
+      transparent 42%
+    ),
+    #090b18 !important;
+  background-attachment: fixed !important;
+  font-family: Inter, "Segoe UI", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- ENTRY / CREATE / JOIN PAGE ---------- */
+
+#root main:not(.syncplay-room) {
+  color: var(--sp-text) !important;
+  background:
+    radial-gradient(
+      ellipse at 10% 12%,
+      rgba(240, 68, 98, 0.23),
+      transparent 36%
+    ),
+    radial-gradient(
+      ellipse at 92% 78%,
+      rgba(76, 99, 255, 0.22),
+      transparent 36%
+    ),
+    linear-gradient(
+      135deg,
+      #090b18 0%,
+      #15132b 48%,
+      #0b1427 100%
+    ) !important;
+  background-attachment: fixed !important;
+}
+
+#root main:not(.syncplay-room) h1,
+#root main:not(.syncplay-room) h2 {
+  color: #fbfaff !important;
+  letter-spacing: -0.7px;
+}
+
+#root main:not(.syncplay-room) p,
+#root main:not(.syncplay-room) label {
+  color: #c0c9df !important;
+}
+
+#root main:not(.syncplay-room) form,
+#root main:not(.syncplay-room) section,
+#root main:not(.syncplay-room) [class*="card"],
+#root main:not(.syncplay-room) [class*="Card"],
+#root main:not(.syncplay-room) [class*="panel"] {
+  border-color: rgba(139, 151, 218, 0.22) !important;
+  box-shadow:
+    0 22px 65px rgba(0, 0, 0, 0.25),
+    0 0 35px rgba(100, 90, 210, 0.055);
+}
+
+/* Inputs */
+#root main:not(.syncplay-room) input,
+#root main:not(.syncplay-room) textarea,
+#root main:not(.syncplay-room) select {
+  color: #f7f8ff !important;
+  background: rgba(7, 11, 27, 0.88) !important;
+  border: 1px solid rgba(143, 155, 207, 0.25) !important;
+  border-radius: 12px !important;
+}
+
+#root main:not(.syncplay-room) input:focus,
+#root main:not(.syncplay-room) textarea:focus,
+#root main:not(.syncplay-room) select:focus {
+  border-color: var(--sp-blue) !important;
+  box-shadow: 0 0 0 3px rgba(100, 120, 255, 0.17) !important;
+}
+
+/* ---------- SHARED GRADIENT BUTTONS ---------- */
+
+#root main:not(.syncplay-room) form button,
+#root main:not(.syncplay-room) button[type="submit"],
+.syncplay-room .room-layout > section > div:first-child button {
+  color: #fff !important;
+  background: linear-gradient(
+    110deg,
+    #e83f61 0%,
+    #a64f9f 48%,
+    #586fff 100%
+  ) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  border-radius: 11px !important;
+  box-shadow: 0 7px 22px rgba(114, 72, 185, 0.20);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    filter 180ms ease;
+}
+
+#root main:not(.syncplay-room) form button:hover,
+#root main:not(.syncplay-room) button[type="submit"]:hover,
+.syncplay-room .room-layout > section > div:first-child button:hover {
+  filter: brightness(1.12);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(119, 82, 230, 0.28);
+}
+
+/* ---------- MAIN WATCH ROOM ---------- */
+
+.syncplay-room {
+  color: var(--sp-text) !important;
+  background:
+    radial-gradient(
+      ellipse at 3% 2%,
+      rgba(229, 57, 87, 0.18),
+      transparent 34%
+    ),
+    radial-gradient(
+      ellipse at 97% 9%,
+      rgba(76, 99, 255, 0.19),
+      transparent 32%
+    ),
+    radial-gradient(
+      ellipse at 48% 100%,
+      rgba(122, 43, 105, 0.10),
+      transparent 42%
+    ),
+    linear-gradient(140deg, #090b18, #101329 52%, #090e1d) !important;
+  background-attachment: fixed !important;
+}
+
+/* Room title: crimson, violet and blue gradient */
+.syncplay-room header h1 {
+  color: transparent !important;
+  background: linear-gradient(
+    100deg,
+    #ffffff 0%,
+    #ff8198 38%,
+    #b2a0ff 68%,
+    #6ee4fa 100%
+  ) !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  text-shadow: none !important;
+}
+
+.syncplay-room header {
+  border-color: rgba(153, 160, 218, 0.19) !important;
+}
+
+.syncplay-room header p,
+.syncplay-room p,
+.syncplay-room small {
+  color: var(--sp-muted);
+}
+
+/* Video controls and status card */
+.syncplay-room .room-layout > section > div:first-child,
+.syncplay-room .room-layout > section > div:has(iframe),
+.syncplay-room .room-layout > section > div[style*="background"] {
+  border-color: rgba(143, 151, 214, 0.19) !important;
+}
+
+/* Right sidebar: subtle red-blue tinted surface */
+.syncplay-room .room-sidebar {
+  color: var(--sp-text) !important;
+  background:
+    linear-gradient(
+      150deg,
+      rgba(31, 24, 48, 0.97),
+      rgba(15, 23, 43, 0.98) 65%,
+      rgba(14, 25, 43, 0.98)
+    ) !important;
+  border: 1px solid rgba(144, 151, 216, 0.22) !important;
+  box-shadow:
+    0 20px 55px rgba(0, 0, 0, 0.22),
+    0 0 30px rgba(101, 83, 202, 0.055);
+}
+
+.syncplay-room .room-sidebar h2,
+.syncplay-room .room-sidebar h3 {
+  color: #f7f5ff !important;
+}
+
+.syncplay-room .room-sidebar > h2:first-child,
+.syncplay-room .room-sidebar > div[style*="borderTop"] {
+  border-color: rgba(145, 154, 215, 0.20) !important;
+}
+
+/* Chat history */
+.syncplay-room .room-sidebar [aria-label="Room chat"] > div[aria-live="polite"],
+.syncplay-room .room-sidebar [aria-label="Room chat and reactions"] > div[aria-live="polite"] {
+  color: #edf0ff !important;
+  background: rgba(5, 9, 23, 0.88) !important;
+  border-color: rgba(126, 143, 210, 0.23) !important;
+  border-radius: 12px !important;
+}
+
+/* Chat inputs */
+.syncplay-room .room-sidebar input,
+.syncplay-room .room-sidebar textarea {
+  color: #f7f8ff !important;
+  background: rgba(7, 12, 29, 0.94) !important;
+  border-color: rgba(137, 148, 209, 0.26) !important;
+}
+
+.syncplay-room input::placeholder,
+.syncplay-room textarea::placeholder {
+  color: #8996b5 !important;
+}
+
+/* Reactions: refined dark buttons with a blue-red hover accent */
+.syncplay-room .room-sidebar button[aria-label*="😂"],
+.syncplay-room .room-sidebar button[aria-label*="❤️"],
+.syncplay-room .room-sidebar button[aria-label*="🔥"],
+.syncplay-room .room-sidebar button[aria-label*="👏"],
+.syncplay-room .room-sidebar button[aria-label*="😮"],
+.syncplay-room .room-sidebar button[aria-label*="👍"],
+.syncplay-room .room-sidebar button[aria-label*="🎉"],
+.syncplay-room .room-sidebar button[aria-label*="😭"] {
+  background: linear-gradient(
+    145deg,
+    #202941,
+    #171d30
+  ) !important;
+  border: 1px solid rgba(142, 157, 208, 0.25) !important;
+  border-radius: 11px !important;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease !important;
+}
+
+.syncplay-room .room-sidebar button[aria-label*="😂"]:hover,
+.syncplay-room .room-sidebar button[aria-label*="❤️"]:hover,
+.syncplay-room .room-sidebar button[aria-label*="🔥"]:hover,
+.syncplay-room .room-sidebar button[aria-label*="👏"]:hover,
+.syncplay-room .room-sidebar button[aria-label*="😮"]:hover,
+.syncplay-room .room-sidebar button[aria-label*="👍"]:hover,
+.syncplay-room .room-sidebar button[aria-label*="🎉"]:hover,
+.syncplay-room .room-sidebar button[aria-label*="😭"]:hover {
+  background: linear-gradient(
+    120deg,
+    rgba(229, 57, 87, 0.22),
+    rgba(76, 99, 255, 0.24)
+  ) !important;
+  border-color: rgba(151, 143, 255, 0.65) !important;
+}
+
+/* Accessible focus styling */
+#root button:focus-visible,
+#root input:focus-visible,
+#root textarea:focus-visible,
+#root select:focus-visible {
+  outline: 2px solid var(--sp-cyan) !important;
+  outline-offset: 3px;
+}
+
+/* Respect reduced-motion settings */
+@media (prefers-reduced-motion: reduce) {
+  #root *,
+  #root *::before,
+  #root *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =====================================================
+   SYNCPLAY — FINAL UI POLISH
+   Crimson / Electric Blue | Responsive | Task-focused
+   ===================================================== */
+
+:root {
+  --sp-polish-red: #f04462;
+  --sp-polish-blue: #6478ff;
+  --sp-polish-cyan: #55d9f4;
+  --sp-polish-panel: rgba(18, 23, 43, 0.94);
+  --sp-polish-border: rgba(151, 164, 220, 0.22);
+  --sp-polish-muted: #aeb9d3;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #090b18;
+}
+
+body {
+  color: #f5f7ff !important;
+  background:
+    radial-gradient(ellipse at 5% 8%, rgba(240, 68, 98, .14), transparent 34%),
+    radial-gradient(ellipse at 95% 12%, rgba(100, 120, 255, .17), transparent 35%),
+    linear-gradient(145deg, #090b18, #101329 55%, #090e1d) !important;
+  background-attachment: fixed !important;
+}
+
+::selection {
+  color: #ffffff;
+  background: rgba(240, 68, 98, .45);
+}
+
+/* Shared interaction polish */
+#root button,
+#root input,
+#root textarea,
+#root select {
+  font-family: inherit;
+}
+
+#root button {
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    border-color .18s ease,
+    filter .18s ease !important;
+}
+
+#root button:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+#root button:focus-visible,
+#root input:focus-visible,
+#root textarea:focus-visible,
+#root select:focus-visible {
+  outline: 2px solid var(--sp-polish-cyan) !important;
+  outline-offset: 3px;
+}
+
+/* Entry page: preserve its existing form and behavior */
+#root main:not(.syncplay-room) {
+  color: #f5f7ff !important;
+  background:
+    radial-gradient(ellipse at 8% 12%, rgba(240, 68, 98, .20), transparent 36%),
+    radial-gradient(ellipse at 92% 75%, rgba(100, 120, 255, .21), transparent 36%),
+    linear-gradient(145deg, #090b18, #151329 52%, #0b1427) !important;
+  background-attachment: fixed !important;
+}
+
+#root main:not(.syncplay-room) h1 {
+  color: #ffffff !important;
+  letter-spacing: -1px;
+}
+
+#root main:not(.syncplay-room) form,
+#root main:not(.syncplay-room) [class*="card"],
+#root main:not(.syncplay-room) [class*="Card"],
+#root main:not(.syncplay-room) [class*="panel"] {
+  border: 1px solid var(--sp-polish-border) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .23);
+}
+
+#root main:not(.syncplay-room) input,
+#root main:not(.syncplay-room) textarea,
+#root main:not(.syncplay-room) select {
+  box-sizing: border-box;
+  max-width: 100%;
+  color: #f5f7ff !important;
+  background: rgba(6, 10, 24, .88) !important;
+  border: 1px solid var(--sp-polish-border) !important;
+  border-radius: 11px !important;
+}
+
+#root main:not(.syncplay-room) input:focus,
+#root main:not(.syncplay-room) textarea:focus,
+#root main:not(.syncplay-room) select:focus {
+  border-color: var(--sp-polish-blue) !important;
+  box-shadow: 0 0 0 3px rgba(100, 120, 255, .15) !important;
+}
+
+#root main:not(.syncplay-room) form button,
+#root main:not(.syncplay-room) button[type="submit"] {
+  color: #ffffff !important;
+  background: linear-gradient(110deg, #e84462, #a34fa5 52%, #586fff) !important;
+  border: 1px solid rgba(255, 255, 255, .10) !important;
+  border-radius: 11px !important;
+  box-shadow: 0 8px 22px rgba(117, 74, 187, .20);
+}
+
+#root main:not(.syncplay-room) form button:hover:not(:disabled),
+#root main:not(.syncplay-room) button[type="submit"]:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(117, 74, 187, .30);
+}
+
+/* Room page background and header */
+.syncplay-room {
+  color: #f5f7ff !important;
+  background:
+    radial-gradient(ellipse at 3% 2%, rgba(240, 68, 98, .15), transparent 34%),
+    radial-gradient(ellipse at 97% 10%, rgba(100, 120, 255, .16), transparent 34%),
+    linear-gradient(140deg, #090b18, #101329 55%, #090e1d) !important;
+  background-attachment: fixed !important;
+}
+
+.syncplay-room header {
+  border-color: var(--sp-polish-border) !important;
+}
+
+.syncplay-room header h1 {
+  color: transparent !important;
+  background: linear-gradient(100deg, #ffffff, #ff8299 40%, #b0a0ff 72%, #6ee4fa) !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.syncplay-room .room-layout > section,
+.syncplay-room .room-layout > aside.room-sidebar {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+/* Preserve the aligned outer panels */
+.syncplay-room .room-layout > section {
+  border-color: var(--sp-polish-border) !important;
+}
+
+.syncplay-room .room-layout > aside.room-sidebar {
+  background:
+    linear-gradient(145deg, rgba(31, 24, 48, .97), rgba(15, 23, 43, .98) 70%) !important;
+  border: 1px solid var(--sp-polish-border) !important;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, .18);
+}
+
+.syncplay-room .room-sidebar h2,
+.syncplay-room .room-sidebar h3 {
+  color: #f7f5ff !important;
+}
+
+.syncplay-room .room-sidebar input,
+.syncplay-room .room-sidebar textarea {
+  box-sizing: border-box;
+  max-width: 100% !important;
+  color: #f5f7ff !important;
+  background: rgba(6, 10, 24, .90) !important;
+  border-color: var(--sp-polish-border) !important;
+  border-radius: 10px !important;
+}
+
+.syncplay-room .room-sidebar button[aria-label*="😂"],
+.syncplay-room .room-sidebar button[aria-label*="❤️"],
+.syncplay-room .room-sidebar button[aria-label*="🔥"],
+.syncplay-room .room-sidebar button[aria-label*="👏"],
+.syncplay-room .room-sidebar button[aria-label*="😮"],
+.syncplay-room .room-sidebar button[aria-label*="👍"],
+.syncplay-room .room-sidebar button[aria-label*="🎉"],
+.syncplay-room .room-sidebar button[aria-label*="😭"] {
+  background: linear-gradient(145deg, #202941, #171d30) !important;
+  border: 1px solid var(--sp-polish-border) !important;
+  border-radius: 11px !important;
+}
+
+.syncplay-room .room-sidebar button[aria-label*="😂"]:hover,
+.syncplay-room .room-sidebar button[aria-label*="❤️"]:hover,
+.syncplay-room .room-sidebar button[aria-label*="🔥"]:hover,
+.syncplay-room .room-sidebar button[aria-label*="👏"]:hover,
+.syncplay-room .room-sidebar button[aria-label*="😮"]:hover,
+.syncplay-room .room-sidebar button[aria-label*="👍"]:hover,
+.syncplay-room .room-sidebar button[aria-label*="🎉"]:hover,
+.syncplay-room .room-sidebar button[aria-label*="😭"]:hover {
+  background: linear-gradient(120deg, rgba(240, 68, 98, .23), rgba(100, 120, 255, .25)) !important;
+  border-color: rgba(151, 143, 255, .65) !important;
+}
+
+/* Compact informational footer styling on both screens.
+   Uses CSS-generated content; no new links or fake company claims. */
+#root main:not(.syncplay-room)::after,
+.syncplay-room::after {
+  content: "SYNCPLAY  •  Watch together, wherever you are.  |  A real-time YouTube watch party";
+  display: block;
+  max-width: 1100px;
+  margin: 42px auto 0;
+  padding: 22px 16px 8px;
+  color: #929dbb;
+  font-size: 12px;
+  line-height: 1.8;
+  letter-spacing: .25px;
+  text-align: center;
+  border-top: 1px solid rgba(151, 164, 220, .16);
+}
+
+/* Responsive polish */
+@media (max-width: 900px) {
+  .syncplay-room .room-layout {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  #root main:not(.syncplay-room)::after,
+  .syncplay-room::after {
+    margin-top: 28px;
+  }
+}
+
+@media (max-width: 520px) {
+  .syncplay-room {
+    padding: 14px !important;
+  }
+
+  .syncplay-room .room-layout {
+    gap: 16px !important;
+  }
+
+  #root main:not(.syncplay-room)::after,
+  .syncplay-room::after {
+    font-size: 11px;
+    padding-inline: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #root *,
+  #root *::before,
+  #root *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =====================================================
+   SYNCPLAY — FINAL WARM PREMIUM THEME
+   Crimson / Rose / Violet / Amber
+   Overrides previous blue and cyan accents.
+   ===================================================== */
+
+:root {
+  --sp-bg: #100b12 !important;
+  --sp-surface: #1b121c !important;
+  --sp-surface-2: #281724 !important;
+  --sp-text: #fff7f8 !important;
+  --sp-muted: #c2adb9 !important;
+  --sp-border: rgba(245, 158, 174, .20) !important;
+  --sp-violet: #c084fc !important;
+  --sp-cyan: #fb7185 !important;
+  --sp-polish-red: #fb476b;
+  --sp-polish-blue: #c084fc;
+  --sp-polish-cyan: #fb7185;
+  --sp-accent: #fb7185;
+  --sp-accent-deep: #be123c;
+  --sp-highlight: #fbbf74;
+}
+
+html,
+body,
+#root {
+  background-color: #100b12 !important;
+}
+
+body {
+  color: #fff7f8 !important;
+  background:
+    radial-gradient(ellipse at 8% 4%, rgba(244, 63, 94, .19), transparent 34%),
+    radial-gradient(ellipse at 92% 20%, rgba(192, 132, 252, .14), transparent 33%),
+    radial-gradient(ellipse at 52% 100%, rgba(251, 146, 60, .08), transparent 38%),
+    linear-gradient(145deg, #100b12, #1b101c 52%, #100d14) !important;
+  background-attachment: fixed !important;
+}
+
+/* Entry / create / join */
+#root main:not(.syncplay-room) {
+  color: #fff7f8 !important;
+  background:
+    radial-gradient(ellipse at 10% 12%, rgba(244, 63, 94, .22), transparent 36%),
+    radial-gradient(ellipse at 90% 78%, rgba(192, 132, 252, .16), transparent 35%),
+    linear-gradient(145deg, #100b12, #211321 55%, #140f19) !important;
+  background-attachment: fixed !important;
+}
+
+#root main:not(.syncplay-room) h1 {
+  color: #fff8fa !important;
+  text-shadow: 0 8px 38px rgba(244, 63, 94, .13) !important;
+}
+
+#root main:not(.syncplay-room) form,
+#root main:not(.syncplay-room) [class*="card"],
+#root main:not(.syncplay-room) [class*="Card"],
+#root main:not(.syncplay-room) [class*="panel"] {
+  color: #fff7f8 !important;
+  background: linear-gradient(
+    145deg,
+    rgba(43, 24, 39, .96),
+    rgba(24, 17, 29, .97)
+  ) !important;
+  border-color: rgba(245, 158, 174, .22) !important;
+  box-shadow: 0 22px 60px rgba(0, 0, 0, .26) !important;
+}
+
+/* Inputs and focus rings */
+#root input,
+#root textarea,
+#root select,
+#root main:not(.syncplay-room) input,
+#root main:not(.syncplay-room) textarea,
+#root main:not(.syncplay-room) select {
+  color: #fff7f8 !important;
+  background: rgba(16, 11, 20, .94) !important;
+  border-color: rgba(245, 158, 174, .24) !important;
+}
+
+#root input:focus,
+#root textarea:focus,
+#root select:focus {
+  border-color: #fb7185 !important;
+  box-shadow: 0 0 0 3px rgba(251, 113, 133, .15) !important;
+}
+
+#root button:focus-visible,
+#root input:focus-visible,
+#root textarea:focus-visible,
+#root select:focus-visible {
+  outline-color: #fb7185 !important;
+}
+
+/* Primary actions: rose to crimson to violet */
+#root main:not(.syncplay-room) form button,
+#root main:not(.syncplay-room) button[type="submit"],
+.syncplay-room button[type="submit"] {
+  color: #ffffff !important;
+  background: linear-gradient(
+    110deg,
+    #e83f62 0%,
+    #c04482 52%,
+    #9357b7 100%
+  ) !important;
+  border-color: rgba(255, 255, 255, .12) !important;
+  box-shadow: 0 8px 26px rgba(190, 24, 93, .20) !important;
+}
+
+#root main:not(.syncplay-room) form button:hover:not(:disabled),
+#root main:not(.syncplay-room) button[type="submit"]:hover:not(:disabled),
+.syncplay-room button[type="submit"]:hover:not(:disabled) {
+  box-shadow: 0 12px 32px rgba(190, 24, 93, .30) !important;
+  transform: translateY(-2px);
+}
+
+/* Watch room */
+.syncplay-room {
+  color: #fff7f8 !important;
+  background:
+    radial-gradient(ellipse at 5% 0%, rgba(244, 63, 94, .16), transparent 35%),
+    radial-gradient(ellipse at 96% 12%, rgba(192, 132, 252, .13), transparent 33%),
+    linear-gradient(145deg, #100b12, #1a111e 55%, #100d14) !important;
+  background-attachment: fixed !important;
+}
+
+.syncplay-room header h1 {
+  color: #fff1f4 !important;
+  background: linear-gradient(
+    100deg, #fff7f8, #fb7185 42%, #d8a0ff 78%, #fbbf74
+  ) !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  text-shadow: none !important;
+}
+
+.syncplay-room .room-sidebar {
+  color: #fff7f8 !important;
+  background: linear-gradient(
+    145deg,
+    rgba(43, 24, 39, .98),
+    rgba(23, 17, 29, .98)
+  ) !important;
+  border-color: rgba(245, 158, 174, .22) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, .20) !important;
+}
+
+.syncplay-room .room-sidebar h2,
+.syncplay-room .room-sidebar h3 {
+  color: #fff1f4 !important;
+}
+
+.syncplay-room .room-sidebar button {
+  border-color: rgba(245, 158, 174, .18);
+}
+
+.syncplay-room .room-sidebar button:hover:not(:disabled) {
+  border-color: rgba(251, 113, 133, .55) !important;
+}
+
+.syncplay-room .room-sidebar input,
+.syncplay-room .room-sidebar textarea {
+  color: #fff7f8 !important;
+  background: #160f19 !important;
+  border-color: rgba(245, 158, 174, .22) !important;
+}
+
+/* Warm, subtle footer */
+#root main:not(.syncplay-room)::after,
+.syncplay-room::after {
+  color: #bda8b5 !important;
+  border-top-color: rgba(245, 158, 174, .18) !important;
+}
+
+/* Responsive safety */
+@media (max-width: 900px) {
+  .syncplay-room .room-layout {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #root *,
+  #root *::before,
+  #root *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ENTRY PAGE — CENTER THE CONTENT */
+#root main:not(.syncplay-room) {
+  min-height: 100vh !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 40px 24px !important;
+}
+
+#root main:not(.syncplay-room) > * {
+  max-width: 100%;
+}
+
+#root main:not(.syncplay-room) form {
+  width: min(100%, 460px) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 600px) {
+  #root main:not(.syncplay-room) {
+    padding: 28px 16px !important;
+  }
+}
+
+/* SYNCPLAY — WARM TAB AND CONTROL COLORS */
+:root {
+  --sp-tab-bg: #211521;
+  --sp-tab-hover: #382039;
+  --sp-tab-active: #51233f;
+  --sp-tab-border: rgba(245, 158, 174, .28);
+  --sp-tab-accent: #fb7185;
+}
+
+/* Navigation tabs and tab controls */
+#root nav a,
+#root nav button,
+#root [role="tab"],
+#root [class*="tab"]:not(input):not(textarea) {
+  border-color: var(--sp-tab-border);
+}
+
+#root nav a:hover,
+#root nav button:hover:not(:disabled),
+#root [role="tab"]:hover,
+#root [class*="tab"]:not(input):not(textarea):hover {
+  background-color: var(--sp-tab-hover);
+  border-color: rgba(251, 113, 133, .55);
+}
+
+/* Selected/active tabs */
+#root [role="tab"][aria-selected="true"],
+#root [aria-current="page"],
+#root nav .active,
+#root nav a.active,
+#root nav button.active {
+  color: #fff7f8 !important;
+  background: linear-gradient(
+    120deg, #51233f, #382039
+  ) !important;
+  border-color: #fb7185 !important;
+  box-shadow: inset 0 -2px 0 #fb7185;
+}
+
+/* Entry page and room action buttons */
+#root main:not(.syncplay-room) button,
+.syncplay-room button {
+  border-color: var(--sp-tab-border);
+  transition: background-color .2s ease,
+              border-color .2s ease,
+              box-shadow .2s ease,
+              transform .2s ease;
+}
+
+/* Secondary buttons, excluding primary submit actions */
+#root main:not(.syncplay-room) button:not([type="submit"]),
+.syncplay-room button:not([type="submit"]) {
+  background-color: #281724;
+  color: #fff1f4;
+}
+
+#root main:not(.syncplay-room) button:not([type="submit"]):hover:not(:disabled),
+.syncplay-room button:not([type="submit"]):hover:not(:disabled) {
+  background-color: #432039;
+  border-color: #fb7185;
+}
+
+/* Primary actions */
+#root main:not(.syncplay-room) button[type="submit"],
+.syncplay-room button[type="submit"] {
+  background: linear-gradient(
+    110deg, #e83f62, #c04482, #9357b7
+  ) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, .16) !important;
+}
+
+/* Focus remains visible without blue */
+#root button:focus-visible,
+#root a:focus-visible,
+#root [role="tab"]:focus-visible {
+  outline: 2px solid #fb7185 !important;
+  outline-offset: 3px;
+}
+/* Replace the blue entry card with a warm plum gradient */
+#root main:not(.syncplay-room) form {
+  background: linear-gradient(
+    145deg,
+    #32182f 0%,
+    #51233f 52%,
+    #392044 100%
+  ) !important;
+  border: 1px solid rgba(251, 113, 133, 0.28) !important;
+  box-shadow: 0 24px 65px rgba(0, 0, 0, 0.32) !important;
+}
+
+/* Keep entry inputs dark and coordinated */
+#root main:not(.syncplay-room) input {
+  background: #180f1b !important;
+  color: #fff7f8 !important;
+  border-color: rgba(245, 158, 174, 0.25) !important;
+}
+
+/* Rose-violet action buttons */
+#root main:not(.syncplay-room) form button {
+  background: linear-gradient(
+    110deg,
+    #e83f62,
+    #c04482,
+    #9357b7
+  ) !important;
+  color: #ffffff !important;
+}
+/* SYNCPLAY ROOM — REMOVE BLUE CARD/PANEL COLORS */
+.syncplay-room .room-sidebar,
+.syncplay-room .room-sidebar [class*="card"],
+.syncplay-room .room-sidebar [class*="panel"] {
+  color: #fff7f8 !important;
+  background: linear-gradient(
+    145deg,
+    #32182f 0%,
+    #51233f 52%,
+    #392044 100%
+  ) !important;
+  border-color: rgba(251, 113, 133, .26) !important;
+}
+
+/* Room sections and content cards */
+.syncplay-room .room-layout > *,
+.syncplay-room [class*="card"],
+.syncplay-room [class*="Card"],
+.syncplay-room [class*="panel"],
+.syncplay-room [class*="Panel"] {
+  color: #fff7f8 !important;
+  background-color: #211521;
+  border-color: rgba(245, 158, 174, .22);
+}
+
+/* Nested participant and room-information surfaces */
+.syncplay-room .room-sidebar input,
+.syncplay-room .room-sidebar textarea,
+.syncplay-room .room-sidebar select {
+  color: #fff7f8 !important;
+  background: #180f1b !important;
+  border-color: rgba(245, 158, 174, .25) !important;
+}
+
+/* Room action buttons */
+.syncplay-room button:not(:disabled) {
+  border-color: rgba(245, 158, 174, .28);
+}
+
+.syncplay-room button:hover:not(:disabled) {
+  border-color: #fb7185 !important;
+}
+
+/* Preserve the existing video player appearance and functionality */
+.syncplay-room iframe,
+.syncplay-room video {
+  background-color: #100b12;
+}
+
+/* FINAL ROOM CARD COLOR FIX — OVERRIDE ORIGINAL BLUE RULES */
+.syncplay-room .room-layout > section > div:first-child,
+.syncplay-room .room-layout > section > div:first-child *,
+.syncplay-room aside.room-sidebar,
+.syncplay-room aside.room-sidebar > div {
+  --sp-border: rgba(245, 158, 174, .22);
+}
+
+.syncplay-room .room-layout > section > div:first-child,
+.syncplay-room .room-layout > section > div:first-child > div,
+.syncplay-room aside.room-sidebar,
+.syncplay-room aside.room-sidebar > div {
+  background-color: #211521 !important;
+  border-color: rgba(245, 158, 174, .24) !important;
+}
+
+.syncplay-room .room-layout > section > div:first-child,
+.syncplay-room aside.room-sidebar {
+  background: linear-gradient(
+    145deg,
+    #32182f 0%,
+    #51233f 52%,
+    #392044 100%
+  ) !important;
+  box-shadow: 0 20px 55px rgba(0, 0, 0, .30) !important;
+}
+
+/* Remove blue from room inputs and chat surfaces */
+.syncplay-room input,
+.syncplay-room textarea,
+.syncplay-room select,
+.syncplay-room [aria-live="polite"] {
+  background-color: #180f1b !important;
+  border-color: rgba(245, 158, 174, .24) !important;
+  color: #fff7f8 !important;
+}
+
+/* Remove cyan focus and hover accents */
+.syncplay-room button:focus-visible,
+.syncplay-room input:focus-visible {
+  outline-color: #fb7185 !important;
+}
+
+.syncplay-room button:hover:not(:disabled) {
+  box-shadow: 0 6px 20px rgba(190, 24, 93, .18) !important;
+}

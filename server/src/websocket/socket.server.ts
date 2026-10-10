@@ -2,6 +2,7 @@ import crypto from "crypto";
 import { Server, Socket } from "socket.io";
 import { roomManager } from "../classes/RoomManager.js";
 import { Participant } from "../classes/Participant.js";
+import { verifyToken } from "../services/auth.service.js";
 
 interface CreateRoomPayload {
   username: string;
@@ -59,8 +60,86 @@ interface RemoveParticipantPayload {
 }
 
 export function setupSocketServer(io: Server): void {
+  io.use((socket, next) => {
+    try {
+      const token = socket.handshake.auth?.token;
+      if (typeof token !== "string" || !token) return next(new Error("Authentication required"));
+      socket.data.user = verifyToken(token);
+      next();
+    } catch { next(new Error("Invalid or expired authentication token")); }
+  });
   io.on("connection", (socket: Socket) => {
     console.log(`Socket connected: ${socket.id}`);
+    /*
+     * REAL-TIME ROOM CHAT
+     */
+    socket.on(
+      "chat_send",
+      (
+        payload: { roomCode?: string; text?: string },
+        callback?: (response: { success: boolean; message?: string }) => void
+      ) => {
+        const room = getSocketRoom(socket);
+        const participant = getSocketParticipant(socket, room);
+        const text = typeof payload?.text === "string" ? payload.text.trim() : "";
+
+        if (!room || !participant || payload?.roomCode !== room.roomCode) {
+          callback?.({ success: false, message: "Join this room before chatting." });
+          return;
+        }
+
+        if (!text || text.length > 500) {
+          callback?.({ success: false, message: "Messages must contain 1–500 characters." });
+          return;
+        }
+
+        const message = {
+          id: crypto.randomUUID(),
+          roomCode: room.roomCode,
+          username: participant.username,
+          text,
+          createdAt: Date.now(),
+        };
+
+        io.to(room.roomCode).emit("chat_message", message);
+        callback?.({ success: true });
+      }
+    );
+
+    /*
+     * ROOM-WIDE EMOJI REACTIONS
+     */
+    socket.on(
+      "reaction_send",
+      (
+        payload: { roomCode?: string; emoji?: string },
+        callback?: (response: { success: boolean; message?: string }) => void
+      ) => {
+        const room = getSocketRoom(socket);
+        const participant = getSocketParticipant(socket, room);
+        const allowed = ["😂", "❤️", "🔥", "👏", "😮", "👍", "🎉", "😭"];
+
+        if (!room || !participant || payload?.roomCode !== room.roomCode) {
+          callback?.({ success: false, message: "Join this room before reacting." });
+          return;
+        }
+
+        if (typeof payload?.emoji !== "string" || !allowed.includes(payload.emoji)) {
+          callback?.({ success: false, message: "Unsupported reaction." });
+          return;
+        }
+
+        io.to(room.roomCode).emit("room_reaction", {
+          id: crypto.randomUUID(),
+          roomCode: room.roomCode,
+          username: participant.username,
+          emoji: payload.emoji,
+          createdAt: Date.now(),
+        });
+
+        callback?.({ success: true });
+      }
+    );
 
     /*
      * CREATE ROOM
@@ -69,7 +148,7 @@ export function setupSocketServer(io: Server): void {
       "create_room",
       (payload: CreateRoomPayload, callback) => {
         try {
-          if (!payload?.username?.trim()) {
+          if (!socket.data.user?.name) {
             callback?.({
               success: false,
               message: "Username is required",
@@ -82,7 +161,7 @@ export function setupSocketServer(io: Server): void {
           const room = roomManager.createRoom(
             participantId,
             socket.id,
-            payload.username.trim(),
+            socket.data.user.name,
             payload.initialVideoId || ""
           );
 
@@ -97,7 +176,7 @@ export function setupSocketServer(io: Server): void {
           });
 
           console.log(
-            `Room created: ${room.roomCode} by ${payload.username}`
+            `Room created: ${room.roomCode} by ${socket.data.user.name}`
           );
         } catch (error) {
           console.error("create_room error:", error);
@@ -117,7 +196,7 @@ export function setupSocketServer(io: Server): void {
       "join_room",
       (payload: JoinRoomPayload, callback) => {
         try {
-          if (!payload?.roomCode || !payload?.username?.trim()) {
+          if (!payload?.roomCode || !socket.data.user?.name) {
             callback?.({
               success: false,
               message: "Room code and username are required",
@@ -145,7 +224,7 @@ export function setupSocketServer(io: Server): void {
             roomCode,
             participantId,
             socket.id,
-            payload.username.trim()
+            socket.data.user.name
           );
 
           if (!participant) {
@@ -172,7 +251,7 @@ export function setupSocketServer(io: Server): void {
           });
 
           console.log(
-            `${payload.username} joined room ${roomCode}`
+            `${socket.data.user.name} joined room ${roomCode}`
           );
         } catch (error) {
           console.error("join_room error:", error);
@@ -709,7 +788,13 @@ export function setupSocketServer(io: Server): void {
     socket.on("disconnect", () => {
       console.log(`Socket disconnected: ${socket.id}`);
 
-      leaveRoom(socket);
+      const room = getSocketRoom(socket);
+      const participant = getSocketParticipant(socket, room);
+      if (room && participant) {
+        participant.reconnect("");
+      }
+      socket.data.roomCode = undefined;
+      socket.data.participantId = undefined;
     });
   });
 }

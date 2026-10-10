@@ -9,3 +9,14 @@ server/dist/
 coverage/
 .DS_Store
 Thumbs.db
+server/.env
+server/data/
+server/.env.*
+!server/.env.example
+# Local backups and secrets
+backup-before-chat-auth/
+backup-playback-refresh-*/
+backup-*/
+client/.env
+client/.env.*
+!client/.env.example
